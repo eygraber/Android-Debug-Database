@@ -17,7 +17,7 @@ android {
 }
 
 dependencies {
-    api project(':debug-db-base')
+    api "com.eygraber:android-debug-db-base:${rootProject.version}"
 }
 
-//apply from: 'debug-db-upload.gradle'
+apply from: 'debug-db-upload.gradle'
