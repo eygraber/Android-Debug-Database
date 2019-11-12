@@ -40,4 +40,4 @@ dependencies {
     implementation 'androidx.sqlite:sqlite:2.0.1'
 }
 
-//apply from: 'debug-db-base-upload.gradle'
+apply from: 'debug-db-base-upload.gradle'
