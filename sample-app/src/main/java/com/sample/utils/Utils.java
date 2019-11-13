@@ -46,8 +46,8 @@ public class Utils {
         if (BuildConfig.DEBUG) {
             try {
                 Class<?> debugDB = Class.forName("com.amitshekhar.DebugDB");
-                Method getAddressLog = debugDB.getMethod("getAddressLog");
-                Object value = getAddressLog.invoke(null);
+                Method getUrl = debugDB.getMethod("getUrl");
+                Object value = getUrl.invoke(null);
                 Toast.makeText(context, (String) value, Toast.LENGTH_LONG).show();
             } catch (Exception ignore) {
 

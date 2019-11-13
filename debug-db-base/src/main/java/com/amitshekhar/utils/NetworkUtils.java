@@ -33,7 +33,7 @@ public final class NetworkUtils {
         // This class in not publicly instantiable
     }
 
-    public static String getAddressLog(Context context, int port) {
+    public static String getUrl(Context context, int port) {
         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
         @SuppressLint("DefaultLocale")
@@ -42,7 +42,7 @@ public final class NetworkUtils {
                 (ipAddress >> 8 & 0xff),
                 (ipAddress >> 16 & 0xff),
                 (ipAddress >> 24 & 0xff));
-        return "Open http://" + formattedIpAddress + ":" + port + " in your browser";
+        return "http://" + formattedIpAddress + ":" + port;
     }
 
 }

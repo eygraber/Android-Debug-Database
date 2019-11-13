@@ -55,7 +55,7 @@ That’s all, just start the application, you will see in the logcat an entry li
 
 * D/DebugDB: Open http://XXX.XXX.X.XXX:<port>> in your browser
 
-* You can also always get the debug address url from your code by calling the method `DebugDB.getAddressLog();`
+* You can also always get the debug address url from your code by calling the method `DebugDB.getUrl();`
 
 The library will attempt to use 8080 for the port, and if it is unavailable, it will use a random open port.
 
@@ -91,8 +91,8 @@ public static void showDebugDBAddressLogToast(Context context) {
     if (BuildConfig.DEBUG) {
        try {
             Class<?> debugDB = Class.forName("com.amitshekhar.DebugDB");
-            Method getAddressLog = debugDB.getMethod("getAddressLog");
-            Object value = getAddressLog.invoke(null);
+            Method getUrl = debugDB.getMethod("getUrl");
+            Object value = getUrl.invoke(null);
             Toast.makeText(context, (String) value, Toast.LENGTH_LONG).show();
        } catch (Exception ignore) {
 
