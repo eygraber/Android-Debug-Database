@@ -42,7 +42,7 @@ public class DebugDB {
     private static final String TAG = DebugDB.class.getSimpleName();
     private static final int DEFAULT_PORT = 8080;
     private static ClientServer clientServer;
-    private static String addressLog = "not available";
+    private static String url = null;
 
     private DebugDB() {
         // This class in not publicly instantiable
@@ -51,16 +51,19 @@ public class DebugDB {
     public static void initialize(final Context context, DBFactory dbFactory) {
         clientServer = new ClientServer(context, dbFactory, new ClientServer.OnReadyListener() {
             @Override public void onReady(int port) {
-                addressLog = NetworkUtils.getAddressLog(context, port);
-                Log.d(TAG, addressLog);
+                url = NetworkUtils.getUrl(context, port);
+                logAddress();
             }
         });
         clientServer.start();
     }
 
-    public static String getAddressLog() {
-        Log.d(TAG, addressLog);
-        return addressLog;
+    public static String getUrl() {
+        return url;
+    }
+
+    public static void logAddress() {
+        Log.d(TAG, "Open " + url + " in your browser");
     }
 
     public static void shutDown() {
