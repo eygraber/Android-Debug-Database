@@ -28,6 +28,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amitshekhar.DebugDB;
 import com.sample.encrypt.database.CarDBHelper;
 import com.sample.encrypt.database.ContactDBHelper;
 import com.sample.encrypt.database.ExtTestDBHelper;
@@ -37,6 +38,7 @@ import com.sample.encrypt.database.room.UserDBHelper;
 import com.sample.encrypt.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        DebugDB.setPasswords(new HashMap<String, String>() {{
+            put("Person.db", "test");
+        }});
 
         Set<String> stringSet = new HashSet<>();
         stringSet.add("SetOne");

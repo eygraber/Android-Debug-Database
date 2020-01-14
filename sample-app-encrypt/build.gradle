@@ -4,16 +4,13 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.sample.encrypt"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
     }
     buildTypes {
-        debug {
-            resValue("string", "DB_PASSWORD_PERSON", "a_password")
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -23,8 +20,8 @@ android {
 
 dependencies {
     debugImplementation project(':debug-db-encrypt')
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.room:room-runtime:2.2.1'
-    annotationProcessor 'androidx.room:room-compiler:2.2.1'
-    implementation 'net.zetetic:android-database-sqlcipher:3.5.9'
+    implementation deps.appCompat
+    implementation deps.room
+    annotationProcessor deps.roomCompiler
+    implementation deps.sqlCipher
 }

@@ -25,7 +25,6 @@ package com.amitshekhar.server;
 
 import android.content.Context;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
@@ -37,6 +36,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ClientServer implements Runnable {
     public interface OnReadyListener {
@@ -107,7 +107,11 @@ public class ClientServer implements Runnable {
         }
     }
 
-    public void setCustomDatabaseFiles(HashMap<String, Pair<File, String>> customDatabaseFiles) {
+    public void setPasswords(Map<String, String> passwords) {
+        mRequestHandler.setPasswords(passwords);
+    }
+
+    public void setCustomDatabaseFiles(HashMap<String, File> customDatabaseFiles) {
         mRequestHandler.setCustomDatabaseFiles(customDatabaseFiles);
     }
 

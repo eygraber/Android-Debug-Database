@@ -37,7 +37,7 @@ public class PersonDBHelper extends SQLiteOpenHelper {
     public static final String PERSON_COLUMN_FIRST_NAME = "first_name";
     public static final String PERSON_COLUMN_LAST_NAME = "last_name";
     public static final String PERSON_COLUMN_ADDRESS = "address";
-    private static final String DB_PASSWORD = "a_password";
+    private static final String DB_PASSWORD = "test";
 
     public PersonDBHelper(Context context) {
 

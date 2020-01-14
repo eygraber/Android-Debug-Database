@@ -36,8 +36,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'androidx.sqlite:sqlite:2.0.1'
+    implementation deps.gson
+    implementation deps.androidXSqlite
 }
 
 apply from: 'debug-db-base-upload.gradle'

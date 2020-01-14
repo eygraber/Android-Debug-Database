@@ -21,7 +21,6 @@ package com.amitshekhar;
 
 import android.content.Context;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
@@ -31,6 +30,7 @@ import com.amitshekhar.utils.NetworkUtils;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.amitshekhar.server.ClientServer.INVALID_PORT;
 
@@ -74,7 +74,13 @@ public class DebugDB {
         }
     }
 
-    public static void setCustomDatabaseFiles(HashMap<String, Pair<File, String>> customDatabaseFiles) {
+    public static void setPasswords(Map<String, String> passwords) {
+        if(clientServer != null) {
+            clientServer.setPasswords(passwords);
+        }
+    }
+
+    public static void setCustomDatabaseFiles(HashMap<String, File> customDatabaseFiles) {
         if (clientServer != null) {
             clientServer.setCustomDatabaseFiles(customDatabaseFiles);
         }

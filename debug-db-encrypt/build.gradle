@@ -18,10 +18,10 @@ android {
 
 dependencies {
     api "com.eygraber:android-debug-db-base:${rootProject.version}"
-    compileOnly 'net.zetetic:android-database-sqlcipher:4.3.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compileOnly deps.sqlCipher
+    testImplementation deps.jUnit
+    androidTestImplementation deps.androidTestRunner
+    androidTestImplementation deps.espresso
 }
 
 apply from: 'debug-db-encrypt-upload.gradle'

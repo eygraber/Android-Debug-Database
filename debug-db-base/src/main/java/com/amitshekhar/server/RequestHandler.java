@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Pair;
 
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
@@ -52,6 +51,7 @@ import java.net.Socket;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by amitshekhar on 06/02/17.
@@ -65,8 +65,9 @@ public class RequestHandler {
     private final DBFactory mDbFactory;
     private boolean isDbOpened;
     private SQLiteDB sqLiteDB;
-    private HashMap<String, Pair<File, String>> mDatabaseFiles;
-    private HashMap<String, Pair<File, String>> mCustomDatabaseFiles;
+    private HashMap<String, File> mDatabaseFiles;
+    private Map<String, String> mPasswords = new HashMap<>();
+    private HashMap<String, File> mCustomDatabaseFiles;
     private String mSelectedDatabase = null;
     private HashMap<String, SupportSQLiteDatabase> mRoomInMemoryDatabases = new HashMap<>();
 
@@ -165,7 +166,11 @@ public class RequestHandler {
         }
     }
 
-    public void setCustomDatabaseFiles(HashMap<String, Pair<File, String>> customDatabaseFiles) {
+    public void setPasswords(Map<String, String> passwords) {
+        mPasswords = passwords;
+    }
+
+    public void setCustomDatabaseFiles(HashMap<String, File> customDatabaseFiles) {
         mCustomDatabaseFiles = customDatabaseFiles;
     }
 
@@ -183,8 +188,11 @@ public class RequestHandler {
         if (mRoomInMemoryDatabases.containsKey(database)) {
             sqLiteDB = new InMemoryDebugSQLiteDB(mRoomInMemoryDatabases.get(database));
         } else {
-            File databaseFile = mDatabaseFiles.get(database).first;
-            String password = mDatabaseFiles.get(database).second;
+            File databaseFile = mDatabaseFiles.get(database);
+            String password = mPasswords.get(databaseFile.getName());
+            if(password == null) {
+                password = "";
+            }
             sqLiteDB = mDbFactory.create(mContext, databaseFile.getAbsolutePath(), password);
         }
         isDbOpened = true;
@@ -205,8 +213,12 @@ public class RequestHandler {
         }
         Response response = new Response();
         if (mDatabaseFiles != null) {
-            for (HashMap.Entry<String, Pair<File, String>> entry : mDatabaseFiles.entrySet()) {
-                String[] dbEntry = {entry.getKey(), !entry.getValue().second.equals("") ? "true" : "false", "true"};
+            for (HashMap.Entry<String, File> entry : mDatabaseFiles.entrySet()) {
+                String password = mPasswords.get(entry.getValue().getName());
+                if(password == null) {
+                    password = "";
+                }
+                String[] dbEntry = {entry.getKey(), !password.equals("") ? "true" : "false", "true"};
                 response.rows.add(dbEntry);
             }
         }
@@ -390,7 +402,7 @@ public class RequestHandler {
         try {
             closeDatabase();
 
-            File dbFile = mDatabaseFiles.get(mSelectedDatabase).first;
+            File dbFile = mDatabaseFiles.get(mSelectedDatabase);
             response.isSuccessful = dbFile.delete();
 
             if (response.isSuccessful) {

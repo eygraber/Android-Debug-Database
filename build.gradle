@@ -23,7 +23,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0-beta03'
+        classpath 'com.android.tools.build:gradle:3.6.0-rc01'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
@@ -36,8 +36,19 @@ allprojects {
         mavenLocal()
     }
 }
+ext.deps = [
+  androidTestRunner: "com.android.support.test:runner:1.0.2",
+  androidXSqlite: "androidx.sqlite:sqlite:2.0.1",
+  appCompat: "androidx.appcompat:appcompat:1.1.0",
+  espresso: "com.android.support.test.espresso:espresso-core:3.0.2",
+  gson: "com.google.code.gson:gson:2.8.5",
+  jUnit: "junit:junit:4.12",
+  room: "androidx.room:room-runtime:2.2.3",
+  roomCompiler: "androidx.room:room-compiler:2.2.3",
+  sqlCipher: "net.zetetic:android-database-sqlcipher:4.3.0",
+]
 
-version = '2.0.1'
+version = '2.0.2'
 
 task clean(type: Delete) {
     delete rootProject.buildDir
