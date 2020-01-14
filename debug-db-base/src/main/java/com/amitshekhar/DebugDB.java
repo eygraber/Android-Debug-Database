@@ -49,11 +49,17 @@ public class DebugDB {
         // This class in not publicly instantiable
     }
 
+    private static Runnable onReadyListener = null;
+
     public static void initialize(final Context context, DBFactory dbFactory) {
         clientServer = new ClientServer(context, dbFactory, new ClientServer.OnReadyListener() {
             @Override public void onReady(int port) {
                 url = NetworkUtils.getUrl(context, port);
                 logAddress();
+
+                if(onReadyListener != null && isServerRunning()) {
+                    onReadyListener.run();
+                }
             }
         });
         clientServer.start();
@@ -65,6 +71,13 @@ public class DebugDB {
 
     public static void logAddress() {
         Log.d(TAG, "Open " + url + " in your browser");
+    }
+
+    public static void setOnReadyListener(Runnable listener) {
+        onReadyListener = listener;
+        if(onReadyListener != null && isServerRunning()) {
+            listener.run();
+        }
     }
 
     public static void shutDown() {
