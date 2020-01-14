@@ -43,6 +43,7 @@ ext.deps = [
   espresso: "com.android.support.test.espresso:espresso-core:3.0.2",
   gson: "com.google.code.gson:gson:2.8.5",
   jUnit: "junit:junit:4.12",
+  relinker: "com.getkeepsafe.relinker:relinker:1.4.0",
   room: "androidx.room:room-runtime:2.2.3",
   roomCompiler: "androidx.room:room-compiler:2.2.3",
   sqlCipher: "net.zetetic:android-database-sqlcipher:4.3.0",

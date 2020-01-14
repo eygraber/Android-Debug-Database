@@ -18,6 +18,7 @@ android {
 
 dependencies {
     api "com.eygraber:android-debug-db-base:${rootProject.version}"
+    implementation deps.relinker
     compileOnly deps.sqlCipher
     testImplementation deps.jUnit
     androidTestImplementation deps.androidTestRunner
